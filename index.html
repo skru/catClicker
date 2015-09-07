@@ -32,6 +32,7 @@
      
       $.each( cats, function( index, value ){
           console.log(index,value.count)
+          
           var box = $('<div/>', {
               id: index,
               text: index,
@@ -50,13 +51,19 @@
           });
           counter.appendTo(box);
           
-          box.appendTo('#cat-container')
+          box.appendTo('#cat-container');
           
-          $("#"+index).click(function(){
-              var count = $('#c'+index).text()
-              count++
-              $('#c'+index).text(count)
-          });
+          (function() {
+               $(box).click( function(){
+               var count = $(counter).text()
+               count++
+               $(counter).text(count)
+             });
+          }());
+
+      
+
+
           
       });
     </script>
