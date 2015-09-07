@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <title>Cat Clicker</title>
+    <style>
+      #main-cat-cont {
+        width: 75%;
+        margin: 0 auto;
+      }
+      #cat {
+        width: 100%;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  
+  <body>
+    <div id='main-cat-cont'>
+      <div id='cat-container'>
+        <img src='http://www.gordonrigg.com/the-hub/wp-content/uploads/2015/06/little_cute_cat_1920x1080.jpg' id='cat'>
+      </div>
+      <div id='counter-container'>
+        <p id='counter'>0</p>
+      </div>
+    </div>
+    <script src='https://code.jquery.com/jquery-2.1.4.min.js'></script>
+    <script>
+      $('#cat').click(function(e) {
+        var count = $('#counter').text()
+        count++
+        $('#counter').text(count)
+      });
+    </script>
+  </body>
+</html>
