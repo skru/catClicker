@@ -19,6 +19,7 @@
   
   <body>
     <div id='main-cat-cont'>
+      <ul id='cat-list'></ul>
       <div id='cat-container'>
       </div>
     </div>
@@ -27,16 +28,21 @@
       
       var cats = {
         'jess': {count: 0, imgsrc:'http://www.gordonrigg.com/the-hub/wp-content/uploads/2015/06/little_cute_cat_1920x1080.jpg'},
-        'mog': {count: 0, imgsrc:'http://www.gordonrigg.com/the-hub/wp-content/uploads/2015/06/little_cute_cat_1920x1080.jpg'}
+        'mog': {count: 0, imgsrc:'http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg'},
+        'coolio': {count: 0, imgsrc:'http://dreamatico.com/data_images/cat/cat-6.jpg'},
+        'trumps': {count: 0, imgsrc:'http://stylonica.com/wp-content/uploads/2014/04/Cat-Wallpaper.jpg'},
+        'grrrr': {count: 0, imgsrc:'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRIMDDmRw8GAAGozumauOKrUSAzBIcTbiibOMuOmccKheGi4_VPxg'},
+        'tubles': {count: 0, imgsrc:'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTHI4IKefbN94RugdzdQqh77jWjSZULfePrWvPnNW3ysbrlHvpc'}
       }
      
       $.each( cats, function( index, value ){
-          console.log(index,value.count)
           
           var box = $('<div/>', {
-              id: index,
               text: index,
+              class: 'cat-box'
+              
           });
+          box.css('display','none');
           
           var img = $('<img />', {
               class: 'cat',
@@ -46,20 +52,28 @@
           img.appendTo(box);
           
           var counter = $('<div/>', {
-              id: 'c'+index,
               text: value.count,
           });
           counter.appendTo(box);
           
           box.appendTo('#cat-container');
           
-          (function() {
-               $(box).click( function(){
-               var count = $(counter).text()
-               count++
-               $(counter).text(count)
-             });
-          }());
+          $(box).click( function(){
+              var count = $(counter).text()
+              count++
+              $(counter).text(count)
+          });
+        
+        
+          var catlist = $('<li/>', {
+              text: index,
+          });
+          catlist.appendTo('#cat-list');
+          $(catlist).click( function(){
+              console.log(index)
+              $('.cat-box').css('display','none');
+              box.css('display','inline-block');
+          });
 
       
 
