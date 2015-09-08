@@ -1,31 +1,38 @@
 $(function() {
     var model = {
-        cats: {
-            'jess': {
+        currentCat: null,
+        cats: [
+            {
+                name: 'jess',
                 count: 0,
                 imgsrc: 'http://www.gordonrigg.com/the-hub/wp-content/uploads/2015/06/little_cute_cat_1920x1080.jpg'
             },
-            'mog': {
+            {
+                name: 'mog',
                 count: 0,
                 imgsrc: 'http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg'
             },
-            'coolio': {
+            {
+                name: 'coolio',
                 count: 0,
                 imgsrc: 'http://dreamatico.com/data_images/cat/cat-6.jpg'
             },
-            'trumps': {
+            {
+                name: 'trumps',
                 count: 0,
                 imgsrc: 'http://stylonica.com/wp-content/uploads/2014/04/Cat-Wallpaper.jpg'
             },
-            'grrrr': {
+            {
+                name: 'grrr',
                 count: 0,
                 imgsrc: 'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRIMDDmRw8GAAGozumauOKrUSAzBIcTbiibOMuOmccKheGi4_VPxg'
             },
-            'tubles': {
+            {
+                name: 'tubles',
                 count: 0,
                 imgsrc: 'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTHI4IKefbN94RugdzdQqh77jWjSZULfePrWvPnNW3ysbrlHvpc'
             }
-        },
+        ],
         init: function() {
             if (!localStorage.notes) {
                 localStorage.notes = JSON.stringify(model.cats);
@@ -41,56 +48,82 @@ $(function() {
 
 
     var octopus = {
-        addToCount: function(index) {
-            model.add(index)
-            view.render(index);
-        },
-
+        
         init: function() {
             model.init();
+            model.currentCat = model.cats[0];
             listview.init();
+            view.init();
+        },
+        
+        addToCount: function() {
+            model.currentCat.count++;
+            view.render();
         },
 
         showCat: function(index) {
             view.render(index);
+        },
+        
+        getCurrentCat: function() {
+            return model.currentCat;
+        },
+        
+        getCats: function() {
+            return model.cats;
+        },
+        
+        setCurrentCat: function(cat) {
+          //console.log(cat)
+            model.currentCat = (model.cats[cat]);
+            view.render()
+            
         }
+        
+        // showAdmin: function(index) {
+        //     adminview.render(index);
+        // }
     };
 
 
 
     var view = {
         init: function() {
-            view.render();
+            this.catElem = $('#cat-box');
+            this.catNameElem = $('#cat-name');
+            this.catImageElem = $('#cat-img');
+            this.countElem = $('#cat-count');
+            this.catElem.click(function() {
+                octopus.addToCount()
+            });
         },
         
         render: function(index) {
-            $('#cat-container').empty();
+            var currentCat = octopus.getCurrentCat();
+            this.catNameElem.text(currentCat.name);
+            this.catImageElem.attr("src", currentCat.imgsrc);
+            this.countElem.text(currentCat.count);
             
-            var obj = model.cats[index];
-            var box = $('<div/>', {
-                id: 'cat' + index,
-                text: index,
-                class: 'cat-box'
-            });
+            
+ 
+            //form
+            
+            // var adminButton = $('<input/>').attr({
+            //     type: "button",
+            //     id: "field",
+            //     value: 'admin'
+            // });
+            // //adminButton.appendTo(box);
+            // $(adminButton).click(function() {
+            //     console.log('jij')
+            //     octopus.showAdmin(index);
+            // });
 
-            var img = $('<img />', {
-                class: 'cat',
-                src: obj.imgsrc,
-                alt: index
-            });
-            img.appendTo(box);
+            //box.appendTo('#cat-container');
 
-            var counter = $('<div/>', {
-                text: obj.count,
-            });
-            counter.appendTo(box);
-
-            box.appendTo('#cat-container');
-
-            $(box).click(function() {
-                octopus.addToCount(index)
-                $(counter).text(obj.count)
-            });
+            
+            
+            
         }
     };
     var listview = {
@@ -98,15 +131,24 @@ $(function() {
             listview.render();
         },
         render: function() {
-            $.each(model.cats, function(index, value) {
+            $.each(octopus.getCats(), function(cat, value) {
+              console.log(value)
                 var catlist = $('<li/>', {
-                    text: index,
+                    text: value.name,
                 });
                 catlist.appendTo('#cat-list');
                 $(catlist).click(function() {
-                    octopus.showCat(index);
+                    octopus.setCurrentCat(cat);
                 });
             });
+        }
+    };
+    var adminview = {
+        init: function() {
+            adminview.render();
+        },
+        render: function(index) {
+            console.log(index)
         }
     };
     octopus.init()
