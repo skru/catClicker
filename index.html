@@ -22,23 +22,31 @@
       <ul id='cat-list'></ul>
       <div id='cat-container'>
         <div id='cat-box'>
-          <div id='cat-name'></div>
-          <div id='cat-count'></div>
-          <img id='cat-img' class='cat'>
-          <input type='button' id='cat-admin' value='admin'>
+          <div id='cat-name' data-bind='text: name'></div>
+          <div id='cat-count' data-bind='text: clickCount'></div>
+          <img id='cat-img' class='cat' data-bind='click: incrementCounter,
+          attr: {src: imgsrc}'>
+          <div data-bind="foreach: nickList">
+              <ul>
+                  <li data-bind="text: name"></li>
+                  
+              </ul>
+          </div>
+          <!--<input type='button' id='cat-admin' value='admin'>-->
           
-          <form id='formy'>
-            <input type='text' id='form-name'>
-            <input type='text' id='form-count'>
-            <input type='text' id='form-imgsrc'>
-            <input type='submit' id='form-submit' value='save'>
-            <input type='button' id='form-cancel' value='cancel'>
-          </form>
+          <!--<form id='formy'>-->
+          <!--  <input type='text' id='form-name'>-->
+          <!--  <input type='text' id='form-count'>-->
+          <!--  <input type='text' id='form-imgsrc'>-->
+          <!--  <input type='submit' id='form-submit' value='save'>-->
+          <!--  <input type='button' id='form-cancel' value='cancel'>-->
+          <!--</form>-->
           
         </div>
       </div>
     </div>
-    <script src='https://code.jquery.com/jquery-2.1.4.min.js'></script>
+    <!--<script src='https://code.jquery.com/jquery-2.1.4.min.js'></script>-->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js'></script>
     <script src='js/app.js'></script>
   </body>
 </html>
