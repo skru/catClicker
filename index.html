@@ -19,16 +19,19 @@
   
   <body>
     <div id='main-cat-cont'>
-      <ul id='cat-list'></ul>
+      <ul id='cat-list' data-bind='foreach: catList'>
+        <li data-bind='click: changeCat, text: name'></li>
+      </ul>
       <div id='cat-container'>
         <div id='cat-box' data-bind='with:currentCat'>
-          <div id='cat-name' data-bind='text: name'></div>
+          <h2 id='cat-name' data-bind='text: name'></h2>
           <div id='cat-count' data-bind='text: clickCount'></div>
           <img id='cat-img' class='cat' data-bind='click: $parent.incrementCounter,
           attr: {src: imgsrc}'>
+          <h3>Nick Names:</h3>
           <div data-bind="foreach: nickList">
               <ul>
-                  <li data-bind="text: name"></li>
+                  <li data-bind="text: $data"></li>
                   
               </ul>
           </div>
