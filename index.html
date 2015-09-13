@@ -21,10 +21,10 @@
     <div id='main-cat-cont'>
       <ul id='cat-list'></ul>
       <div id='cat-container'>
-        <div id='cat-box'>
+        <div id='cat-box' data-bind='with:currentCat'>
           <div id='cat-name' data-bind='text: name'></div>
           <div id='cat-count' data-bind='text: clickCount'></div>
-          <img id='cat-img' class='cat' data-bind='click: incrementCounter,
+          <img id='cat-img' class='cat' data-bind='click: $parent.incrementCounter,
           attr: {src: imgsrc}'>
           <div data-bind="foreach: nickList">
               <ul>
@@ -32,15 +32,6 @@
                   
               </ul>
           </div>
-          <!--<input type='button' id='cat-admin' value='admin'>-->
-          
-          <!--<form id='formy'>-->
-          <!--  <input type='text' id='form-name'>-->
-          <!--  <input type='text' id='form-count'>-->
-          <!--  <input type='text' id='form-imgsrc'>-->
-          <!--  <input type='submit' id='form-submit' value='save'>-->
-          <!--  <input type='button' id='form-cancel' value='cancel'>-->
-          <!--</form>-->
           
         </div>
       </div>
